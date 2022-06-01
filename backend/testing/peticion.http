@@ -1,0 +1,31 @@
+//  COMENTARIO CRUD DESDE TERMINAL. Ext: REST Client. Instalar en visual studio code.
+// crear archivo de prueba con la extension .http
+
+###
+GET http://localhost:9000/server/searchBy/comentarios/id/1
+
+###
+POST http://localhost:9000/server/create/comentarios HTTP/1.1
+Content-Type: application/json
+
+{  
+  "nombre": "Prueba 1",
+  "email": "juan@gmail.com",
+  "pagina_web": "https://github.com",
+  "comentario": "Comentario de Prueba"
+}
+
+###
+PUT  http://localhost:9000/server/update/comentarios/id/1 HTTP/1.1
+content-type: application/json
+
+{
+  "nombre": "Prueba 1 editada",
+  "email": "juan@gmail.com",
+  "pagina_web": "https://github.com",
+  "comentario": "Comentario de Prueba editado"
+}
+
+###
+DELETE http://localhost:9000/server/delete/comentarios/id/1 HTTP/1.1
+
