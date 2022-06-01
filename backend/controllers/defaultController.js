@@ -145,3 +145,19 @@ export const update = (req, res) => {
     console.log(`Ocurrión un error update ${err}`);
   }
 };
+
+export const getAll = (req, res) => {
+  try {
+    let { tabla } = req.params
+    conn.query(`SELECT * FROM ${tabla}`, (err, result) => {
+      console.log(err
+        ? `Err getAll ${err}`
+        : `getAll results: ${result.length}`);
+      res.json(err
+        ? { msg: 'Ocurrió un error al consultar los datos' }
+        : { rows: result, msg: !result ? 'Sin resultados' : result.length == 1 ? '1 resultados' : `${result.length} resultados` })
+    })
+  } catch (err) {
+    console.log(`Ocurrión un error getAll ${err}`);
+  }
+}
