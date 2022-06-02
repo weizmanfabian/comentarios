@@ -13,4 +13,8 @@ app.get("/", (req, res) => {
     res.send("Estás en el servidor")
 })
 
+app.get("/getVersion", (req, res) => {
+    res.json("0.1.1 todos los derechos reservados”")
+})
+
 app.listen(port, () => console.log(`Server running on port ${port}`))
