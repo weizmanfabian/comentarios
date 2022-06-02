@@ -99,17 +99,7 @@ const Form = ({
   const submit = async (e) => {
     e.preventDefault()
 
-    if (consultarCorreoDuplicado(form.email) && !registro) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Solo se puede hacer un comentario por correo',
-        showConfirmButton: true,
-        toast: true,
-        timerProgressBar: true,
-      })
-    } else {
-
+    if (registro) {
       handleSubmit(
         e,
         registro ? 'update' : 'create',
@@ -118,9 +108,36 @@ const Form = ({
         form.id,
         () => handleForm(false)
       )
+    } else {
+
+
+      const { data } = await searchBy('comentarios', 'email', form.email)
+      const { rows } = await data
+
+      if (rows.length > 0) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Solo se puede hacer un comentario por correo',
+          showConfirmButton: true,
+          toast: true,
+          timerProgressBar: true,
+        })
+      } else {
+        handleSubmit(
+          e,
+          registro ? 'update' : 'create',
+          form,
+          'id',
+          form.id,
+          () => handleForm(false)
+        )
+      }
+
+
+
 
     }
-
   }
 
   const handleRegistro = async () => {
